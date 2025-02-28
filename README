@@ -1,0 +1,57 @@
+# Phone Letter Combinations HTTP Server
+
+## Overview
+This project is a simple HTTP server that provides letter combinations for a given phone number input. It is implemented using Python and Flask.
+
+## Features
+- Accepts a POST request with a phone number (digits 2-9)
+- Returns all possible letter combinations based on standard phone mappings
+
+## API Endpoint
+### **POST /combinations**
+**Request Body:**
+```json
+{
+  "phoneNumber": "23"
+}
+```
+
+**Response:**
+```json
+{
+  "combinations": ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
+}
+```
+
+## Installation & Usage
+
+### 1. **Clone the Repository**
+```bash
+git clone https://github.com/MDN7-tech/phone-combinations.git
+cd phone-combinations
+```
+
+### 2. **Build the Docker Image**
+```bash
+docker build -t phone-combinations .
+```
+
+### 3. **Run the Container**
+```bash
+docker run -p 8080:8080 --rm phone-combinations
+```
+
+### 4. **Test the API**
+Use `curl` or Postman to test:
+```bash
+curl -X POST http://localhost:8080/combinations \
+     -H "Content-Type: application/json" \
+     -d '{"phoneNumber": "23"}'
+```
+
+
+## Security Considerations
+- The application runs as a **non-root user** inside the container.
+- The Dockerfile is optimized for security with minimal base image.
+- Uses `gunicorn` instead of Flask’s built-in server for production.
+
